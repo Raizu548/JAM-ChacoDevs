@@ -6,7 +6,8 @@ onready var botonDer = $BotonDer
 onready var botonIzq = $BotonIzq
 onready var contPosIzq = $ConPosIzq
 onready var contPosDer = $ConPosDer
-onready var areaIzq = $Area2D
+onready var posFueraDer = $PositionFueraDer
+onready var tween = $TweenDer
 
 var arregloIZq: Array
 
@@ -35,6 +36,10 @@ func _process(delta: float) -> void:
 		botonDer.esPresionado()
 		var objeto: CuadroAccion = get_node("contenedorDer").get_child(0)
 		print(objeto.get_tipo())
+		tween.interpolate_property(objeto,"position",objeto.global_position,posFueraDer.global_position,
+		0.3, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+		tween.start()
+		
 	elif Input.is_action_just_pressed("flecha_izq"):
 		botonIzq.esPresionado()
 		

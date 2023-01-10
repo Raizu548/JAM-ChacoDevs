@@ -95,3 +95,8 @@ position = Vector2( 85, -3 )
 [node name="contenedorIzq" type="Node" parent="."]
 
 [node name="contenedorDer" type="Node" parent="."]
+
+[node name="PositionFueraDer" type="Position2D" parent="."]
+position = Vector2( 315, 752 )
+
+[node name="TweenDer" type="Tween" parent="."]
