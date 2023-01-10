@@ -1,3 +1,97 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://juego/botones/BotonFlecha.tscn" type="PackedScene" id=1]
+[ext_resource path="res://juego/nivel/Nivel.gd" type="Script" id=2]
+[ext_resource path="res://juego/cuadros/CuadroAccion.tscn" type="PackedScene" id=3]
 
 [node name="Nivel" type="Node2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 628.0, 490.0, 440.0, 438.0, 388.0, 386.0, 336.0, 334.0, 284.0, 282.0, 232.0, 230.0, 180.0, 178.0, 128.0, 126.0, 76.0, 74.0, 24.0, 22.0, -28.0 ],
+"_edit_vertical_guides_": [ 212.0, 40.0, 385.0, 60.0, 365.0, 85.0, 340.0, 70.0, 355.0 ]
+}
+cuadroAccion = ExtResource( 3 )
+
+[node name="BotonIzq" parent="." instance=ExtResource( 1 )]
+position = Vector2( 85, 628 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="BotonDer" parent="." instance=ExtResource( 1 )]
+position = Vector2( 340, 628 )
+rotation = 3.14159
+scale = Vector2( 0.75, 0.75 )
+
+[node name="ConPosIzq" type="Node2D" parent="."]
+
+[node name="Position2D" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 110, 534 )
+
+[node name="Position2D2" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, 465 )
+
+[node name="Position2D3" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, 413 )
+
+[node name="Position2D4" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, 361 )
+
+[node name="Position2D5" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, 309 )
+
+[node name="Position2D6" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, 257 )
+
+[node name="Position2D7" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, 205 )
+
+[node name="Position2D8" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, 153 )
+
+[node name="Position2D9" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, 101 )
+
+[node name="Position2D10" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, 49 )
+
+[node name="Position2D11" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, -3 )
+
+[node name="ConPosDer" type="Node2D" parent="."]
+position = Vector2( 255, 0 )
+
+[node name="Position2D" type="Position2D" parent="ConPosDer"]
+position = Vector2( 60, 534 )
+
+[node name="Position2D2" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, 465 )
+
+[node name="Position2D3" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, 413 )
+
+[node name="Position2D4" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, 361 )
+
+[node name="Position2D5" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, 309 )
+
+[node name="Position2D6" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, 257 )
+
+[node name="Position2D7" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, 205 )
+
+[node name="Position2D8" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, 153 )
+
+[node name="Position2D9" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, 101 )
+
+[node name="Position2D10" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, 49 )
+
+[node name="Position2D11" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, -3 )
+
+[node name="contenedorIzq" type="Node" parent="."]
+
+[node name="contenedorDer" type="Node" parent="."]

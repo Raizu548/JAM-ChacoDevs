@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "BotonFlecha",
+"language": "GDScript",
+"path": "res://juego/botones/BotonFlecha.gd"
+}, {
+"base": "Node2D",
+"class": "CuadroAccion",
+"language": "GDScript",
+"path": "res://juego/cuadros/CuadroAccion.gd"
+} ]
+_global_script_class_icons={
+"BotonFlecha": "",
+"CuadroAccion": ""
+}
+
 [application]
 
 config/name="JAM-ChacoDevs"
@@ -15,8 +31,21 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=320
-window/size/height=568
+window/size/width=425
+window/size/height=700
+
+[input]
+
+flecha_izq={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777231,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+flecha_der={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777233,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [physics]
 
