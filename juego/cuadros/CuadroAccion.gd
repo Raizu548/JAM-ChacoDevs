@@ -25,3 +25,8 @@ func _ready() -> void:
 func crear(pos: Vector2, tipo_cuadro: String):
 	mi_pos = pos
 	tipo = tipo_cuadro
+
+
+func agrandar(tam: float) -> void:
+	scale.x = tam
+	scale.y = tam
