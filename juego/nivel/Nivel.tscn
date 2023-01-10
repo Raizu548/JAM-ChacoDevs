@@ -97,9 +97,13 @@ position = Vector2( 85, -3 )
 [node name="contenedorDer" type="Node" parent="."]
 
 [node name="PositionFueraDer" type="Position2D" parent="."]
-position = Vector2( 315, 752 )
+position = Vector2( 315, 710 )
 
 [node name="PositionFueraIzq" type="Position2D" parent="."]
-position = Vector2( 110, 752 )
+position = Vector2( 110, 710 )
 
-[node name="Tween" type="Tween" parent="."]
+[node name="TweenDesplazamiento" type="Tween" parent="."]
+
+[node name="TweenDesaparecer" type="Tween" parent="."]
+
+[connection signal="tween_completed" from="TweenDesaparecer" to="." method="_on_TweenDesaparecer_tween_completed"]

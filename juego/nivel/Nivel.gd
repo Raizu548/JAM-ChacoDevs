@@ -8,7 +8,10 @@ onready var contPosIzq = $ConPosIzq
 onready var contPosDer = $ConPosDer
 onready var posFueraDer = $PositionFueraDer
 onready var posFueraIzq = $PositionFueraIzq
-onready var tween = $Tween
+onready var contenedorDer = $contenedorDer
+onready var contenedorIzq = $contenedorIzq
+onready var tween = $TweenDesplazamiento
+onready var tweenDesap = $TweenDesaparecer
 
 var tamano = 1.6
 
@@ -38,16 +41,18 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("flecha_der"):
 		botonDer.esPresionado()
 		var objeto: CuadroAccion = get_node("contenedorDer").get_child(0)
-		print(objeto.get_tipo())
-		print(objeto)
-		tween.interpolate_property(objeto,"position",objeto.global_position,posFueraDer.global_position,
-		0.2, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
-		tween.start()
+		desaparecer_objeto(objeto,posFueraDer)
+		objeto = get_node("contenedorIzq").get_child(0)
+		desaparecer_objeto(objeto,posFueraIzq)
 		
+		bajar_cuadros(contPosDer,contenedorDer)
+		bajar_cuadros(contPosIzq,contenedorIzq)
+		agrandar_ambos_primero()
+
 	elif Input.is_action_just_pressed("flecha_izq"):
 		botonIzq.esPresionado()
 		
-
+	
 func seleccionar_tipo() -> String:
 	var random = RandomNumberGenerator.new()
 	random.randomize()
@@ -61,3 +66,43 @@ func seleccionar_tipo() -> String:
 func agrandar_objeto(objeto: CuadroAccion, tamano) -> void:
 	print(objeto)
 	objeto.agrandar(tamano)
+
+
+func agrandar_ambos_primero() -> void:
+	var objDer = get_node("contenedorDer").get_child(1)
+	var objIzq = get_node("contenedorIzq").get_child(1)
+	print("objeDer: " , objDer, " - objetoIzq: " , objIzq)
+	tween.interpolate_property(objDer,"scale",Vector2(1,1), Vector2(tamano,tamano), 0.2,
+		Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	tween.start()
+	tween.interpolate_property(objIzq,"scale",Vector2(1,1), Vector2(tamano,tamano), 0.2,
+		Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	tween.start()
+
+
+func bajar_cuadros(contenedorPos: Node2D, contObj: Node) -> void:
+	##var posiciones = contenedorPos.get_child_count() -1
+	var posiciones = contObj.get_child_count() -1
+	print(posiciones)
+	for i in range(posiciones):
+		print(i)
+		var posAbajo = contenedorPos.get_child(i)
+		var objeto = contObj.get_child(i +1)
+		tween.interpolate_property(objeto, "position", objeto.global_position, posAbajo.global_position,
+		0.2, Tween.TRANS_LINEAR, tween.EASE_IN_OUT)
+		tween.start()
+
+
+func desaparecer_objeto(objeto: CuadroAccion, posFuera) -> void:
+	tweenDesap.interpolate_property(objeto,"position",objeto.global_position,posFuera.global_position,
+		0.2, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	tweenDesap.start()
+	#objeto.queue_free()
+
+
+func agregar_nuevo_cuadro() -> void:
+	pass
+
+
+func _on_TweenDesaparecer_tween_completed(object: Object, key: NodePath) -> void:
+	object.queue_free()
