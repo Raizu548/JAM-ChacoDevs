@@ -17,6 +17,7 @@ onready var timerPulso = $TimerPulsacion
 onready var contenedorPuntuacion = $PuntuacionInGame
 onready var moustroDatos = $Moustro
 onready var barraTiempo = $BarraTiempo
+onready var ventanaDerrota = $HUD/VentanaEmergentederrota
 
 var tamano = 1.6
 var puedePulsar = true
@@ -52,6 +53,7 @@ func _process(delta: float) -> void:
 	if puedePulsar:
 		timerPulso.start()
 		if Input.is_action_just_pressed("flecha_der"):
+			barraTiempo.comenzar()
 			botonDer.esPresionado()
 			var objeto: CuadroAccion = get_node("contenedorDer").get_child(0)
 			mover_al_centro(objeto)
@@ -66,6 +68,7 @@ func _process(delta: float) -> void:
 			puedePulsar = false
 
 		elif Input.is_action_just_pressed("flecha_izq"):
+			barraTiempo.comenzar()
 			botonIzq.esPresionado()
 			var objeto: CuadroAccion = get_node("contenedorIzq").get_child(0)
 			mover_al_centro(objeto)
@@ -154,6 +157,10 @@ func obtenerPunto(objeto: CuadroAccion) -> void:
 		barraTiempo.resetear_tiempo()
 	else:
 		barraTiempo.disminuir_tiempo()
+
+
+func congelar() -> void:
+	pass
 
 
 func _on_TweenDesaparecer_tween_completed(object: Object, key: NodePath) -> void:

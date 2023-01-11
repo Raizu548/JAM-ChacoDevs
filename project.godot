@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "PuntuacionInGame",
 "language": "GDScript",
 "path": "res://juego/cuadroInformacion/PuntuacionInGame.gd"
+}, {
+"base": "Panel",
+"class": "VentanaEmergenteDerrota",
+"language": "GDScript",
+"path": "res://juego/HUD/VentanaEmergentederrota.gd"
 } ]
 _global_script_class_icons={
 "BotonFlecha": "",
 "CuadroAccion": "",
 "Moustro": "",
-"PuntuacionInGame": ""
+"PuntuacionInGame": "",
+"VentanaEmergenteDerrota": ""
 }
 
 [application]
@@ -44,6 +50,7 @@ config/icon="res://icon.png"
 [autoload]
 
 DatosJuego="*res://juego/Autoloads/DatosJuego.gd"
+Evento="*res://juego/Autoloads/Evento.gd"
 
 [display]
 

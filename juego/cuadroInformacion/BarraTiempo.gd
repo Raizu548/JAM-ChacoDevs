@@ -6,6 +6,7 @@ export var tiempoDisminuido: float
 onready var barraTiempo = $ProgressBar
 
 var tiempoSeg: float
+var arrancar: bool = false 
 
 
 func _ready() -> void:
@@ -15,12 +16,17 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	tiempoSeg -= 1 * delta
-	barraTiempo.value = tiempoSeg
+	if arrancar:
+		tiempoSeg -= 1 * delta
+		barraTiempo.value = tiempoSeg
 
-	if tiempoSeg <= 0:
-		print("Perdiste")
-		set_process(false)
+		if tiempoSeg <= 0:
+			set_process(false)
+			Evento.emit_signal("guardar_puntos")
+
+
+func comenzar() -> void:
+	arrancar = true
 
 
 func resetear_tiempo() -> void:
