@@ -117,9 +117,12 @@ func desaparecer_objeto(objeto: CuadroAccion, posFuera) -> void:
 
 
 func mover_al_centro(objeto: CuadroAccion) -> void:
+	tween.interpolate_property(objeto,"scale",Vector2(tamano,tamano), Vector2(0.2,0.2),
+		velocidadAnimacion,Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	tween.start()
 	tweenDesap.interpolate_property(objeto,"position",objeto.global_position, posCentro.global_position,
 		velocidadAnimacion, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
-	tween.start()
+	tweenDesap.start()
 
 
 func agregar_nuevo_cuadro() -> void:
