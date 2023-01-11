@@ -7,7 +7,7 @@
 [node name="Nivel" type="Node2D"]
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 628.0, 490.0, 440.0, 438.0, 388.0, 386.0, 336.0, 334.0, 284.0, 282.0, 232.0, 230.0, 180.0, 178.0, 128.0, 126.0, 76.0, 74.0, 24.0, 22.0, -28.0 ],
+"_edit_horizontal_guides_": [ 628.0, 490.0, 440.0, 438.0, 388.0, 386.0, 336.0, 334.0, 284.0, 282.0, 232.0, 230.0, 180.0, 178.0, 128.0, 126.0, 76.0, 74.0, 24.0, 22.0, -28.0, -30.0, -80.0, -55.0 ],
 "_edit_vertical_guides_": [ 212.0, 40.0, 385.0, 60.0, 365.0, 85.0, 340.0, 70.0, 355.0 ]
 }
 cuadroAccion = ExtResource( 3 )
@@ -56,6 +56,9 @@ position = Vector2( 85, 49 )
 [node name="Position2D11" type="Position2D" parent="ConPosIzq"]
 position = Vector2( 85, -3 )
 
+[node name="Position2D12" type="Position2D" parent="ConPosIzq"]
+position = Vector2( 85, -55 )
+
 [node name="ConPosDer" type="Node2D" parent="."]
 position = Vector2( 255, 0 )
 
@@ -92,6 +95,9 @@ position = Vector2( 85, 49 )
 [node name="Position2D11" type="Position2D" parent="ConPosDer"]
 position = Vector2( 85, -3 )
 
+[node name="Position2D12" type="Position2D" parent="ConPosDer"]
+position = Vector2( 85, -55 )
+
 [node name="contenedorIzq" type="Node" parent="."]
 
 [node name="contenedorDer" type="Node" parent="."]
@@ -106,4 +112,7 @@ position = Vector2( 110, 710 )
 
 [node name="TweenDesaparecer" type="Tween" parent="."]
 
+[node name="TimerPulsacion" type="Timer" parent="."]
+
 [connection signal="tween_completed" from="TweenDesaparecer" to="." method="_on_TweenDesaparecer_tween_completed"]
+[connection signal="timeout" from="TimerPulsacion" to="." method="_on_TimerPulsacion_timeout"]

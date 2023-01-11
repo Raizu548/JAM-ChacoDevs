@@ -16,10 +16,8 @@ func _ready() -> void:
 	
 	if tipo == "espada":
 		iconEspada.visible = true
-		print("espada")
 	elif tipo == "bomba":
 		iconBomba.visible = true
-		print("bomba")
 	
 
 func crear(pos: Vector2, tipo_cuadro: String):
