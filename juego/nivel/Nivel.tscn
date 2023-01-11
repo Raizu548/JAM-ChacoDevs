@@ -108,6 +108,9 @@ position = Vector2( 315, 710 )
 [node name="PositionFueraIzq" type="Position2D" parent="."]
 position = Vector2( 110, 710 )
 
+[node name="PositionCentro" type="Position2D" parent="."]
+position = Vector2( 212, 605 )
+
 [node name="TweenDesplazamiento" type="Tween" parent="."]
 
 [node name="TweenDesaparecer" type="Tween" parent="."]

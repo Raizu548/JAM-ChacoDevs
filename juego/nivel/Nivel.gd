@@ -8,6 +8,7 @@ onready var contPosIzq = $ConPosIzq
 onready var contPosDer = $ConPosDer
 onready var posFueraDer = $PositionFueraDer
 onready var posFueraIzq = $PositionFueraIzq
+onready var posCentro = $PositionCentro
 onready var contenedorDer = $contenedorDer
 onready var contenedorIzq = $contenedorIzq
 onready var tween = $TweenDesplazamiento
@@ -16,7 +17,8 @@ onready var timerPulso = $TimerPulsacion
 
 var tamano = 1.6
 var puedePulsar = true
-var cadenciaPulsacion = 0.2
+var cadenciaPulsacion = 0.12
+var velocidadAnimacion = 0.1
 
 func _ready() -> void:
 	timerPulso.wait_time = cadenciaPulsacion
@@ -48,7 +50,7 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("flecha_der"):
 			botonDer.esPresionado()
 			var objeto: CuadroAccion = get_node("contenedorDer").get_child(0)
-			desaparecer_objeto(objeto,posFueraDer)
+			mover_al_centro(objeto)
 			objeto = get_node("contenedorIzq").get_child(0)
 			desaparecer_objeto(objeto,posFueraIzq)
 		
@@ -60,6 +62,16 @@ func _process(delta: float) -> void:
 
 		elif Input.is_action_just_pressed("flecha_izq"):
 			botonIzq.esPresionado()
+			var objeto: CuadroAccion = get_node("contenedorIzq").get_child(0)
+			mover_al_centro(objeto)
+			objeto = get_node("contenedorDer").get_child(0)
+			desaparecer_objeto(objeto,posFueraDer)
+			
+			bajar_cuadros(contPosDer,contenedorDer)
+			bajar_cuadros(contPosIzq,contenedorIzq)
+			agrandar_ambos_primero()
+			agregar_nuevo_cuadro()
+			puedePulsar = false
 		
 	
 func seleccionar_tipo() -> String:
@@ -79,10 +91,10 @@ func agrandar_objeto(objeto: CuadroAccion, tamano) -> void:
 func agrandar_ambos_primero() -> void:
 	var objDer = get_node("contenedorDer").get_child(1)
 	var objIzq = get_node("contenedorIzq").get_child(1)
-	tween.interpolate_property(objDer,"scale",Vector2(1,1), Vector2(tamano,tamano), 0.1,
+	tween.interpolate_property(objDer,"scale",Vector2(1,1), Vector2(tamano,tamano), velocidadAnimacion,
 		Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	tween.start()
-	tween.interpolate_property(objIzq,"scale",Vector2(1,1), Vector2(tamano,tamano), 0.1,
+	tween.interpolate_property(objIzq,"scale",Vector2(1,1), Vector2(tamano,tamano), velocidadAnimacion,
 		Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	tween.start()
 
@@ -94,15 +106,20 @@ func bajar_cuadros(contenedorPos: Node2D, contObj: Node) -> void:
 		var posAbajo = contenedorPos.get_child(i)
 		var objeto = contObj.get_child(i +1)
 		tween.interpolate_property(objeto, "position", objeto.global_position, posAbajo.global_position,
-		0.1, Tween.TRANS_LINEAR, tween.EASE_IN_OUT)
+		velocidadAnimacion, Tween.TRANS_LINEAR, tween.EASE_IN_OUT)
 		tween.start()
 
 
 func desaparecer_objeto(objeto: CuadroAccion, posFuera) -> void:
 	tweenDesap.interpolate_property(objeto,"position",objeto.global_position,posFuera.global_position,
-		0.1, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+		velocidadAnimacion, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	tweenDesap.start()
-	#objeto.queue_free()
+
+
+func mover_al_centro(objeto: CuadroAccion) -> void:
+	tweenDesap.interpolate_property(objeto,"position",objeto.global_position, posCentro.global_position,
+		velocidadAnimacion, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
+	tween.start()
 
 
 func agregar_nuevo_cuadro() -> void:
