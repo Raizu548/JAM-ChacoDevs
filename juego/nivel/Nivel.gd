@@ -14,6 +14,8 @@ onready var contenedorIzq = $contenedorIzq
 onready var tween = $TweenDesplazamiento
 onready var tweenDesap = $TweenDesaparecer
 onready var timerPulso = $TimerPulsacion
+onready var contenedorPuntuacion = $PuntuacionInGame
+onready var moustroDatos = $Moustro
 
 var tamano = 1.6
 var puedePulsar = true
@@ -21,6 +23,7 @@ var cadenciaPulsacion = 0.12
 var velocidadAnimacion = 0.1
 
 func _ready() -> void:
+	iniciar_juego()
 	timerPulso.wait_time = cadenciaPulsacion
 	var posiciones = contPosIzq.get_child_count()
 	
@@ -51,6 +54,7 @@ func _process(delta: float) -> void:
 			botonDer.esPresionado()
 			var objeto: CuadroAccion = get_node("contenedorDer").get_child(0)
 			mover_al_centro(objeto)
+			obtenerPunto(objeto)
 			objeto = get_node("contenedorIzq").get_child(0)
 			desaparecer_objeto(objeto,posFueraIzq)
 		
@@ -64,6 +68,7 @@ func _process(delta: float) -> void:
 			botonIzq.esPresionado()
 			var objeto: CuadroAccion = get_node("contenedorIzq").get_child(0)
 			mover_al_centro(objeto)
+			obtenerPunto(objeto)
 			objeto = get_node("contenedorDer").get_child(0)
 			desaparecer_objeto(objeto,posFueraDer)
 			
@@ -140,7 +145,18 @@ func agregar_nuevo_cuadro() -> void:
 	
 	get_node("contenedorIzq").add_child(nuevo_cuadro_izq)
 	get_node("contenedorDer").add_child(nuevo_cuadro_der)
-	
+
+
+func obtenerPunto(objeto: CuadroAccion) -> void:
+	if objeto.get_tipo() == "espada":
+		contenedorPuntuacion.agregarPunto(moustroDatos.bonus)
+	else:
+		print("mori")
+
+
+func iniciar_juego() -> void: # Temporal
+	DatosJuego.nivel = 1
+	DatosJuego.puntosTotal = 0
 
 func _on_TweenDesaparecer_tween_completed(object: Object, key: NodePath) -> void:
 	object.queue_free()

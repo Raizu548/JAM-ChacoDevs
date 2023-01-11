@@ -18,16 +18,32 @@ _global_script_classes=[ {
 "class": "CuadroAccion",
 "language": "GDScript",
 "path": "res://juego/cuadros/CuadroAccion.gd"
+}, {
+"base": "Node2D",
+"class": "Moustro",
+"language": "GDScript",
+"path": "res://juego/moustro/Moustro.gd"
+}, {
+"base": "Node2D",
+"class": "PuntuacionInGame",
+"language": "GDScript",
+"path": "res://juego/cuadroInformacion/PuntuacionInGame.gd"
 } ]
 _global_script_class_icons={
 "BotonFlecha": "",
-"CuadroAccion": ""
+"CuadroAccion": "",
+"Moustro": "",
+"PuntuacionInGame": ""
 }
 
 [application]
 
 config/name="JAM-ChacoDevs"
 config/icon="res://icon.png"
+
+[autoload]
+
+DatosJuego="*res://juego/Autoloads/DatosJuego.gd"
 
 [display]
 
