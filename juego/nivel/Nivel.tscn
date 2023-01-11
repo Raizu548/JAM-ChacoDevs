@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://juego/botones/BotonFlecha.tscn" type="PackedScene" id=1]
 [ext_resource path="res://juego/nivel/Nivel.gd" type="Script" id=2]
 [ext_resource path="res://juego/cuadros/CuadroAccion.tscn" type="PackedScene" id=3]
+[ext_resource path="res://juego/cuadroInformacion/BarraTiempo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://juego/moustro/Moustro.tscn" type="PackedScene" id=5]
 [ext_resource path="res://juego/cuadroInformacion/PuntuacionInGame.tscn" type="PackedScene" id=6]
 
@@ -124,6 +125,11 @@ position = Vector2( 212, 603 )
 
 [node name="PuntuacionInGame" parent="." instance=ExtResource( 6 )]
 position = Vector2( 212, 95 )
+
+[node name="BarraTiempo" parent="." instance=ExtResource( 4 )]
+position = Vector2( 141, 22 )
+tiempoMax = 3.0
+tiempoDisminuido = 1.0
 
 [connection signal="tween_completed" from="TweenDesaparecer" to="." method="_on_TweenDesaparecer_tween_completed"]
 [connection signal="timeout" from="TimerPulsacion" to="." method="_on_TimerPulsacion_timeout"]

@@ -16,14 +16,15 @@ onready var tweenDesap = $TweenDesaparecer
 onready var timerPulso = $TimerPulsacion
 onready var contenedorPuntuacion = $PuntuacionInGame
 onready var moustroDatos = $Moustro
+onready var barraTiempo = $BarraTiempo
 
 var tamano = 1.6
 var puedePulsar = true
 var cadenciaPulsacion = 0.12
 var velocidadAnimacion = 0.1
 
+
 func _ready() -> void:
-	iniciar_juego()
 	timerPulso.wait_time = cadenciaPulsacion
 	var posiciones = contPosIzq.get_child_count()
 	
@@ -150,13 +151,10 @@ func agregar_nuevo_cuadro() -> void:
 func obtenerPunto(objeto: CuadroAccion) -> void:
 	if objeto.get_tipo() == "espada":
 		contenedorPuntuacion.agregarPunto(moustroDatos.bonus)
+		barraTiempo.resetear_tiempo()
 	else:
-		print("mori")
+		barraTiempo.disminuir_tiempo()
 
-
-func iniciar_juego() -> void: # Temporal
-	DatosJuego.nivel = 1
-	DatosJuego.puntosTotal = 0
 
 func _on_TweenDesaparecer_tween_completed(object: Object, key: NodePath) -> void:
 	object.queue_free()
