@@ -122,7 +122,6 @@ func agrandar_ambos_primero() -> void:
 
 
 func bajar_cuadros(contenedorPos: Node2D, contObj: Node) -> void:
-	##var posiciones = contenedorPos.get_child_count() -1
 	var posiciones = contObj.get_child_count() -1
 	for i in range(posiciones):
 		var posAbajo = contenedorPos.get_child(i)
@@ -169,7 +168,6 @@ func obtenerPunto(objeto: CuadroAccion) -> void:
 		contenedorPuntuacion.agregarPunto(moustroDatos.bonus)
 		barraTiempo.aumentar_tiempo()
 	elif objeto.get_tipo() == "bomba":
-		#barraTiempo.disminuir_tiempo()
 		bombitaTiempo.activar_tiempo()
 		congelado = true
 	else:

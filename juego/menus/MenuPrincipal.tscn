@@ -32,7 +32,7 @@ __meta__ = {
 }
 
 [node name="PanelPuntuacion" parent="." instance=ExtResource( 1 )]
-position = Vector2( 354, 26 )
+position = Vector2( 329, 36 )
 
 [node name="Moustro" parent="." instance=ExtResource( 2 )]
 position = Vector2( 212, 350 )

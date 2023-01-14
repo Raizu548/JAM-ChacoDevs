@@ -15,6 +15,7 @@ func disminuir() -> void:
 	puntaje = puntaje / 2
 	print(puntaje)
 	$LabelPts.text = "{pts}".format({"pts":puntaje})
+	DatosJuego.puntosTotal = puntaje
 
 
 func _on_mostrar_ventana(pts: int) -> void:
@@ -22,6 +23,7 @@ func _on_mostrar_ventana(pts: int) -> void:
 	get_tree().paused = not get_tree().paused
 	puntaje = pts
 	$LabelPts.text = "{pts}".format({"pts":puntaje})
+	
 	if DatosJuego.tipo_muerte == "calavera":
 		$SpriteTiempo.visible = false
 		$SpriteCalavera.visible = true
