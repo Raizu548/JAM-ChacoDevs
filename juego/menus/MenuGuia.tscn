@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://juego/botones/BotonBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://recursos/font/IrishGrover-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assents temporal/marco1.png" type="Texture" id=3]
+[ext_resource path="res://juego/botones/boton_flecha.png" type="Texture" id=4]
+[ext_resource path="res://juego/cuadros/calavera_rojo.png" type="Texture" id=5]
+[ext_resource path="res://juego/cuadros/iconoEspadaPequeno.png" type="Texture" id=6]
+[ext_resource path="res://juego/cuadros/iconoBomba.png" type="Texture" id=7]
+[ext_resource path="res://juego/menus/MenuGuia.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[node name="MenuGuia" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 52.0
+margin_top = 159.0
+margin_right = -52.0
+margin_bottom = -159.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 471.0, 260.0, 285.0, 335.0, 355.0, 405.0, 430.0 ],
+"_edit_vertical_guides_": [ 111.0 ]
+}
+
+[node name="Marco" type="Sprite" parent="."]
+position = Vector2( 161, 180 )
+texture = ExtResource( 3 )
+
+[node name="SpriteFlecha" type="Sprite" parent="."]
+position = Vector2( 31, 292 )
+scale = Vector2( 0.07, 0.07 )
+texture = ExtResource( 4 )
+
+[node name="SpriteFlecha2" type="Sprite" parent="."]
+position = Vector2( 80, 292 )
+scale = Vector2( 0.07, 0.07 )
+texture = ExtResource( 4 )
+flip_h = true
+
+[node name="LabelGuia" type="Label" parent="."]
+margin_left = 65.0
+margin_top = -18.0
+margin_right = 255.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 1 )
+text = "Guia"
+align = 1
+valign = 1
+
+[node name="SpriteEspada" type="Sprite" parent="."]
+position = Vector2( 59, 76 )
+texture = ExtResource( 6 )
+
+[node name="SpriteBomba" type="Sprite" parent="."]
+position = Vector2( 59, 151 )
+texture = ExtResource( 7 )
+
+[node name="SpriteCalavera" type="Sprite" parent="."]
+position = Vector2( 59, 221 )
+texture = ExtResource( 5 )
+
+[node name="BotonContinuar" parent="." instance=ExtResource( 1 )]
+margin_left = 68.0
+margin_top = 323.0
+margin_right = 239.0
+margin_bottom = 376.0
+text = "Continuar"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 101.0
+margin_top = 56.0
+margin_right = 271.0
+margin_bottom = 98.0
+custom_fonts/font = SubResource( 2 )
+text = "Ataque!"
+valign = 1
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 97.0
+margin_top = 130.0
+margin_right = 267.0
+margin_bottom = 172.0
+custom_fonts/font = SubResource( 2 )
+text = "Cuidado! un corto descanso"
+valign = 1
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 94.0
+margin_top = 200.0
+margin_right = 298.0
+margin_bottom = 242.0
+custom_fonts/font = SubResource( 2 )
+text = "¡Peligro! pierdes la mitad"
+valign = 1
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 104.0
+margin_top = 271.0
+margin_right = 308.0
+margin_bottom = 313.0
+custom_fonts/font = SubResource( 2 )
+text = "Con las flechas seleccionas"
+valign = 1
+
+[connection signal="pressed" from="BotonContinuar" to="." method="_on_BotonContinuar_pressed"]

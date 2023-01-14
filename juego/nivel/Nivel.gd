@@ -19,6 +19,7 @@ onready var moustroDatos = $Moustro
 onready var barraTiempo = $BarraTiempo
 onready var bombitaTiempo = $BombitaTiempo
 onready var ventanaDerrota = $HUD/VentanaEmergentederrota
+onready var ventanaGuia = $HUD/MenuGuia
 
 var tamano = 1.6
 var puedePulsar = true
@@ -189,3 +190,8 @@ func _on_TimerPulsacion_timeout() -> void:
 
 func _on_descongelar() -> void:
 	congelado = false
+
+
+func _on_BotonPregunta_pressed() -> void:
+	ventanaGuia.visible = true
+	get_tree().paused = not get_tree().paused
