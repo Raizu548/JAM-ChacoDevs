@@ -10,12 +10,11 @@ func _ready() -> void:
 	Evento.connect("derrota",self,"_on_mostrar_ventana")
 	
 		
-
 func disminuir() -> void:
 	puntaje = puntaje / 2
 	print(puntaje)
 	$LabelPts.text = "{pts}".format({"pts":puntaje})
-	DatosJuego.puntosTotal = puntaje
+	DatosJuego.puntosTotal += puntaje
 
 
 func _on_mostrar_ventana(pts: int) -> void:
