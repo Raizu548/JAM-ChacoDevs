@@ -24,5 +24,5 @@ func cambiar_skin() -> void:
 			$SpriteNivel3.visible = false
 		3: 
 			$SpriteNivel1.visible = false
-			$SpriteNivel2.visible = true
-			$SpriteNivel3.visible = false
+			$SpriteNivel2.visible = false
+			$SpriteNivel3.visible = true
