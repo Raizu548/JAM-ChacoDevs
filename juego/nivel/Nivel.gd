@@ -29,6 +29,7 @@ var velocidadAnimacion = 0.1
 
 
 func _ready() -> void:
+	DatosJuego.tipo_muerte = "tiempo"
 	Evento.connect("descongelar",self,"_on_descongelar")
 	timerPulso.wait_time = cadenciaPulsacion
 	var posiciones = contPosIzq.get_child_count()
