@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://juego/moustro/Moustro.tscn" type="PackedScene" id=1]
+[ext_resource path="res://juego/HUD/PanelPuntuacion.tscn" type="PackedScene" id=2]
+[ext_resource path="res://juego/menus/MenuEvolucionar.gd" type="Script" id=3]
+[ext_resource path="res://juego/botones/BotonBase.tscn" type="PackedScene" id=4]
+
+[node name="MenuEvolucionar" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_vertical_guides_": [ 212.0 ]
+}
+menu_principal = "res://juego/menus/MenuPrincipal.tscn"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.211765, 0.211765, 0.211765, 1 )
+
+[node name="PanelPuntuacion" parent="." instance=ExtResource( 2 )]
+position = Vector2( 350, 30 )
+
+[node name="Moustro" parent="." instance=ExtResource( 1 )]
+position = Vector2( 207, 299 )
+
+[node name="BotonEvolucionar" parent="." instance=ExtResource( 4 )]
+margin_left = 126.0
+margin_top = 440.0
+margin_right = 297.0
+margin_bottom = 493.0
+text = "Evolucionar"
+
+[node name="BotonAtras" parent="." instance=ExtResource( 4 )]
+margin_left = 126.0
+margin_top = 517.0
+margin_right = 297.0
+margin_bottom = 570.0
+text = "Atras"
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[connection signal="pressed" from="BotonEvolucionar" to="." method="_on_BotonEvolucionar_pressed"]
+[connection signal="pressed" from="BotonAtras" to="." method="_on_BotonAtras_pressed"]
