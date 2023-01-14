@@ -44,9 +44,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="JAM-ChacoDevs"
+config/name="Monster evolution"
 run/main_scene="res://juego/menus/MenuPrincipal.tscn"
-config/icon="res://icon.png"
+config/icon="res://juego/moustro/slime_500.png"
 
 [autoload]
 

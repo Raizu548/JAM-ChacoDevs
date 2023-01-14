@@ -154,7 +154,7 @@ position = Vector2( 212, 95 )
 position = Vector2( 141, 22 )
 tiempoMax = 2.0
 tiempoAumentado = 0.3
-aumentoVelocidad = 0.1
+aumentoVelocidad = 0.2
 
 [node name="BotonPregunta" type="TextureButton" parent="."]
 margin_left = 9.0

@@ -32,7 +32,7 @@ func _on_BotonJugar_pressed() -> void:
 func _on_BotonEvolucionar_pressed() -> void:
 	if DatosJuego.puede_evolucionar():
 		DatosJuego.evolucionar()
-		moustro.cambiar_skin()
+		$AnimationPlayer.play("evolucionar")
 		labelPtsEvolucion.text = "{pts}".format({"pts":DatosJuego.array_pts_evolucion[DatosJuego.nivel-1]})
 		$PanelPuntuacion.actualizar_panel()
 		actualizar()
