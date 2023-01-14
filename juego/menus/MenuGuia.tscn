@@ -106,7 +106,8 @@ margin_top = 271.0
 margin_right = 308.0
 margin_bottom = 313.0
 custom_fonts/font = SubResource( 2 )
-text = "Con las flechas seleccionas"
+text = "Con las flechas del teclado  seleccionas."
 valign = 1
+autowrap = true
 
 [connection signal="pressed" from="BotonContinuar" to="." method="_on_BotonContinuar_pressed"]

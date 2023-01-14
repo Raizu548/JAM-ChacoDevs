@@ -29,6 +29,10 @@ var velocidadAnimacion = 0.1
 
 
 func _ready() -> void:
+	if DatosJuego.primera_partida:
+		mostrar_ventana_guia()
+		DatosJuego.primera_partida = false
+		
 	DatosJuego.tipo_muerte = "tiempo"
 	Evento.connect("descongelar",self,"_on_descongelar")
 	timerPulso.wait_time = cadenciaPulsacion
@@ -177,8 +181,9 @@ func obtenerPunto(objeto: CuadroAccion) -> void:
 		barraTiempo.matar_tiempo()
 
 
-func congelar() -> void:
-	pass
+func mostrar_ventana_guia() -> void:
+	ventanaGuia.visible = true
+	get_tree().paused = not get_tree().paused
 
 
 func _on_TweenDesaparecer_tween_completed(object: Object, key: NodePath) -> void:
@@ -194,5 +199,4 @@ func _on_descongelar() -> void:
 
 
 func _on_BotonPregunta_pressed() -> void:
-	ventanaGuia.visible = true
-	get_tree().paused = not get_tree().paused
+	mostrar_ventana_guia()
