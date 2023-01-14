@@ -2,6 +2,7 @@ class_name PuntuacionInGame
 extends Node2D
 
 onready var labelPuntuacion = $LabelPuntuacion
+onready var Animacion = $AnimationPlayer
 var puntuacion: int = 0
 
 func _ready() -> void:
@@ -14,7 +15,8 @@ func _process(delta: float) -> void:
 
 func agregarPunto(bonus: int) -> void:
 	puntuacion += bonus
-
+	Animacion.play("agregar")
+	
 
 func _on_guardar_puntos() -> void:
 	DatosJuego.puntosTotal += puntuacion

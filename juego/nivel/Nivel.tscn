@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://juego/botones/BotonFlecha.tscn" type="PackedScene" id=1]
 [ext_resource path="res://juego/nivel/Nivel.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://juego/HUD/VentanaEmergentederrota.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assents temporal/fondo2.png" type="Texture" id=8]
 [ext_resource path="res://assents temporal/botonPregunta.png" type="Texture" id=9]
+[ext_resource path="res://juego/cuadroInformacion/BombitaTiempo.tscn" type="PackedScene" id=10]
 
 [node name="Nivel" type="Node2D"]
 script = ExtResource( 2 )
@@ -21,12 +22,6 @@ cuadroAccion = ExtResource( 3 )
 [node name="Control" type="Control" parent="."]
 margin_right = 426.0
 margin_bottom = 705.0
-
-[node name="ColorRect" type="ColorRect" parent="Control"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.443137, 0.776471, 0.807843, 1 )
 
 [node name="Sprite" type="Sprite" parent="Control"]
 position = Vector2( 212, 350 )
@@ -152,12 +147,19 @@ position = Vector2( 212, 95 )
 
 [node name="BarraTiempo" parent="." instance=ExtResource( 4 )]
 position = Vector2( 141, 22 )
-tiempoMax = 3.0
-tiempoDisminuido = 1.0
+tiempoMax = 2.0
+tiempoMaxMin = 1.0
+tiempoDisminuido = 0.5
+tiempoAumentado = 0.3
+valorDisminusionTiempoMax = 0.3
 
 [node name="BotonPregunta" type="Sprite" parent="."]
 position = Vector2( 29, 28 )
 texture = ExtResource( 9 )
+
+[node name="BombitaTiempo" parent="." instance=ExtResource( 10 )]
+position = Vector2( 168, 525 )
+tiempoMax = 0.5
 
 [connection signal="tween_completed" from="TweenDesaparecer" to="." method="_on_TweenDesaparecer_tween_completed"]
 [connection signal="timeout" from="TimerPulsacion" to="." method="_on_TimerPulsacion_timeout"]

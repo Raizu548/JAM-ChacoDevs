@@ -17,15 +17,18 @@ onready var timerPulso = $TimerPulsacion
 onready var contenedorPuntuacion = $PuntuacionInGame
 onready var moustroDatos = $Moustro
 onready var barraTiempo = $BarraTiempo
+onready var bombitaTiempo = $BombitaTiempo
 onready var ventanaDerrota = $HUD/VentanaEmergentederrota
 
 var tamano = 1.6
 var puedePulsar = true
+var congelado = false
 var cadenciaPulsacion = 0.12
 var velocidadAnimacion = 0.1
 
 
 func _ready() -> void:
+	Evento.connect("descongelar",self,"_on_descongelar")
 	timerPulso.wait_time = cadenciaPulsacion
 	var posiciones = contPosIzq.get_child_count()
 	
@@ -38,7 +41,7 @@ func _ready() -> void:
 			nuevo_cuadro_izq.crear(contPosIzq.get_child(i).global_position, tipo_izq)
 			nuevo_cuadro_der.crear(contPosDer.get_child(i).global_position, "bomba")
 		else:
-			nuevo_cuadro_izq.crear(contPosIzq.get_child(i).global_position, tipo_izq)
+			nuevo_cuadro_izq.crear(contPosIzq.get_child(i).global_position, "bomba")
 			nuevo_cuadro_der.crear(contPosDer.get_child(i).global_position, "espada")
 			
 		get_node("contenedorIzq").add_child(nuevo_cuadro_izq)
@@ -50,7 +53,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	if puedePulsar:
+	if puedePulsar and !congelado:
 		timerPulso.start()
 		if Input.is_action_just_pressed("flecha_der"):
 			barraTiempo.comenzar()
@@ -89,6 +92,16 @@ func seleccionar_tipo() -> String:
 	var valor = random.randi_range(1,2)
 	if valor == 1:
 		return "espada"
+	else:
+		return "bomba"
+
+
+func seleccionar_segundo_tipo() -> String:
+	var random = RandomNumberGenerator.new()
+	random.randomize()
+	var valor = random.randi_range(1,10)
+	if valor == 1:
+		return "calavera"
 	else:
 		return "bomba"
 
@@ -141,10 +154,10 @@ func agregar_nuevo_cuadro() -> void:
 	var ultimo = contPosDer.get_child_count() -1
 	
 	if tipo_izq == "espada":
-		nuevo_cuadro_izq.crear(contPosIzq.get_child(ultimo).global_position, tipo_izq)
-		nuevo_cuadro_der.crear(contPosDer.get_child(ultimo).global_position, "bomba")
+		nuevo_cuadro_izq.crear(contPosIzq.get_child(ultimo).global_position, "espada")
+		nuevo_cuadro_der.crear(contPosDer.get_child(ultimo).global_position, seleccionar_segundo_tipo())
 	else:
-		nuevo_cuadro_izq.crear(contPosIzq.get_child(ultimo).global_position, tipo_izq)
+		nuevo_cuadro_izq.crear(contPosIzq.get_child(ultimo).global_position, seleccionar_segundo_tipo())
 		nuevo_cuadro_der.crear(contPosDer.get_child(ultimo).global_position, "espada")
 	
 	get_node("contenedorIzq").add_child(nuevo_cuadro_izq)
@@ -154,9 +167,14 @@ func agregar_nuevo_cuadro() -> void:
 func obtenerPunto(objeto: CuadroAccion) -> void:
 	if objeto.get_tipo() == "espada":
 		contenedorPuntuacion.agregarPunto(moustroDatos.bonus)
-		barraTiempo.resetear_tiempo()
+		barraTiempo.aumentar_tiempo()
+	elif objeto.get_tipo() == "bomba":
+		#barraTiempo.disminuir_tiempo()
+		bombitaTiempo.activar_tiempo()
+		congelado = true
 	else:
-		barraTiempo.disminuir_tiempo()
+		DatosJuego.tipo_muerte = "calavera"
+		barraTiempo.matar_tiempo()
 
 
 func congelar() -> void:
@@ -169,3 +187,7 @@ func _on_TweenDesaparecer_tween_completed(object: Object, key: NodePath) -> void
 
 func _on_TimerPulsacion_timeout() -> void:
 	puedePulsar = true
+
+
+func _on_descongelar() -> void:
+	congelado = false
