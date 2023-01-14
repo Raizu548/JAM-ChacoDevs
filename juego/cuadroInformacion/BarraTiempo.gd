@@ -50,7 +50,7 @@ func aumentar_velocidad() -> void:
 func aumentar_tiempo() -> void:
 	if tiempoSeg <= tiempoMax - tiempoAumentado:
 		tiempoSeg += tiempoAumentado
-		clamp(tiempoSeg,0,tiempoMax)
+		tiempoSeg = clamp(tiempoSeg,0,tiempoMax)
 
 
 func _on_Timer_timeout() -> void:
