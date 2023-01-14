@@ -12,7 +12,6 @@ func _ready() -> void:
 		
 func disminuir() -> void:
 	puntaje = puntaje / 2
-	print(puntaje)
 	$LabelPts.text = "{pts}".format({"pts":puntaje})
 	DatosJuego.puntosTotal += puntaje
 
@@ -33,7 +32,6 @@ func _on_mostrar_ventana(pts: int) -> void:
 		$SpriteCalavera.visible = false
 		$LabelMuerte.text = "¡Se acabo el tiempo!"
 		$LabelPts.text = "{pts}".format({"pts":puntaje})
-		print($LabelPts.visible)
 
 
 func _on_BotonAceptar_pressed() -> void:

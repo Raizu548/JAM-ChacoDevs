@@ -96,7 +96,7 @@ margin_right = 67.0
 margin_bottom = 22.0
 custom_colors/font_color = Color( 1, 0.654902, 0, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "1000"
+text = "0"
 align = 1
 valign = 1
 

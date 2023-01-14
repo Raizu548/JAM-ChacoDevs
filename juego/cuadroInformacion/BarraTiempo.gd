@@ -53,15 +53,5 @@ func aumentar_tiempo() -> void:
 		clamp(tiempoSeg,0,tiempoMax)
 
 
-#func disminuir_tiempo() -> void:
-#	tiempoSeg -= tiempoDisminuido
-#
-#
-#func disminuir_tiempo_max() -> void:
-#	if tiempoMaxActual > tiempoMaxMin:
-#		tiempoMaxActual -= valorDisminusionTiempoMax
-#		barraTiempo.max_value = tiempoMaxActual
-
 func _on_Timer_timeout() -> void:
 	aumentar_velocidad()
-	print("tiempo disminuido")

@@ -16,7 +16,6 @@ func _ready() -> void:
 
 
 func puede_evolucionar() -> bool:
-	print("Puntos totales: ", puntosTotal, " - coste evolucion: ", array_pts_evolucion[nivel-1])
 	return puntosTotal >= array_pts_evolucion[nivel-1]
 
 
