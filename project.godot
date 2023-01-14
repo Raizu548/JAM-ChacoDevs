@@ -45,6 +45,7 @@ _global_script_class_icons={
 [application]
 
 config/name="JAM-ChacoDevs"
+run/main_scene="res://juego/menus/MenuPrincipal.tscn"
 config/icon="res://icon.png"
 
 [autoload]
