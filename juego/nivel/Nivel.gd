@@ -23,10 +23,13 @@ onready var ventanaGuia = $HUD/MenuGuia
 onready var barraCombo = $BarraCombo
 onready var labelCombo = $LabelCantCombo
 
+onready var SFXboost = $BoostSFX
+onready var SFXbomba = $BombaSFX
+
 var tamano = 1.6
 var puedePulsar = true
 var congelado = false
-var cadenciaPulsacion = 0.12
+var cadenciaPulsacion = 0.001 #0.12
 var velocidadAnimacion = 0.1
 var combo: float = 0
 var comboTot: int = 0
@@ -134,7 +137,7 @@ func agrandar_ambos_primero() -> void:
 
 
 func bajar_cuadros(contenedorPos: Node2D, contObj: Node) -> void:
-	#var posiciones = contObj.get_child_count() -1
+#	var posiciones = contObj.get_child_count() -1
 	var posiciones = 11 # Hard code -> pero sirve
 	for i in range(posiciones):
 		var posAbajo = contenedorPos.get_child(i)
@@ -157,6 +160,10 @@ func mover_al_centro(objeto: CuadroAccion) -> void:
 	tweenDesap.interpolate_property(objeto,"position",objeto.global_position, posCentro.global_position,
 		velocidadAnimacion, Tween.TRANS_LINEAR,Tween.EASE_IN_OUT)
 	tweenDesap.start()
+
+
+func spawn_cuadros() -> void:
+	pass
 
 
 func agregar_cuadro() -> void:
@@ -217,6 +224,7 @@ func obtenerPunto(objeto: CuadroAccion) -> void:
 		sumar_combo()
 		barraTiempo.aumentar_tiempo()
 	elif objeto.get_tipo() == "bomba":
+		SFXbomba.play()
 		bombitaTiempo.activar_tiempo()
 		congelado = true
 		combo_a_cero()
@@ -241,7 +249,7 @@ func sumar_combo() -> void:
 	if not enCombo:
 		combo += 1
 		if combo == 100:
-			$BoostSFX.play()
+			SFXboost.play()
 			enCombo = true
 			convertir_en_diamantes(contenedorIzq,contPosIzq)
 			convertir_en_diamantes(contenedorDer,contPosDer)
