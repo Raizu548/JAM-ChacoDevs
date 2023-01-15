@@ -19,5 +19,5 @@ func agregarPunto(bonus: int) -> void:
 	
 
 func _on_guardar_puntos() -> void:
-	DatosJuego.puntosTotal += puntuacion
+#	DatosJuego.puntosTotal += puntuacion
 	Evento.emit_signal("derrota", puntuacion)

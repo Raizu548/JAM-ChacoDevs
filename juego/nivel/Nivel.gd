@@ -162,10 +162,6 @@ func mover_al_centro(objeto: CuadroAccion) -> void:
 	tweenDesap.start()
 
 
-func spawn_cuadros() -> void:
-	pass
-
-
 func agregar_cuadro() -> void:
 	if not enCombo:
 		agregar_nuevo_cuadro()

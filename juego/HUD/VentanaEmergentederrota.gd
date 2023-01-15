@@ -26,12 +26,15 @@ func _on_mostrar_ventana(pts: int) -> void:
 		$SpriteTiempo.visible = false
 		$SpriteCalavera.visible = true
 		$LabelMuerte.text = "¡Moriste!"
-		$AnimationPlayer.play("disminuir_recompensa")	
+		$AnimationPlayer.play("disminuir_recompensa")
 	else:
 		$SpriteTiempo.visible = true
 		$SpriteCalavera.visible = false
 		$LabelMuerte.text = "¡Se acabo el tiempo!"
 		$LabelPts.text = "{pts}".format({"pts":puntaje})
+		DatosJuego.puntosTotal += puntaje
+	
+	
 
 
 func _on_BotonAceptar_pressed() -> void:
