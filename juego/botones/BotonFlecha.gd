@@ -20,5 +20,4 @@ func esPresionado() -> void:
 
 func _on_Button_pressed() -> void:
 	presionado = true
-	print("presionado")
 	esPresionado()
