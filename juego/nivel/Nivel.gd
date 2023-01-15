@@ -241,6 +241,7 @@ func sumar_combo() -> void:
 	if not enCombo:
 		combo += 1
 		if combo == 100:
+			$BoostSFX.play()
 			enCombo = true
 			convertir_en_diamantes(contenedorIzq,contPosIzq)
 			convertir_en_diamantes(contenedorDer,contPosDer)
@@ -253,7 +254,6 @@ func sumar_combo() -> void:
 func descontar_combo() -> void:
 	if enCombo:
 		combo -= 0.5
-		print(combo)
 		actualizar_combo()
 		if combo <= 0:
 			enCombo = false
