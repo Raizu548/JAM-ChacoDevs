@@ -1,11 +1,7 @@
 extends Node2D
 
 export var tiempoMax: float
-#export var tiempoMaxMin: float
-#export var tiempoMaxActual: float
-#export var tiempoDisminuido: float
 export var tiempoAumentado: float
-#export var valorDisminusionTiempoMax: float
 export var aumentoVelocidad: float
 
 onready var barraTiempo = $ProgressBar
@@ -35,7 +31,6 @@ func _process(delta: float) -> void:
 
 func comenzar() -> void:
 	arrancar = true
-
 
 
 func matar_tiempo() -> void:

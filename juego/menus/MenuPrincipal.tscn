@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://juego/HUD/PanelPuntuacion.tscn" type="PackedScene" id=1]
 [ext_resource path="res://juego/moustro/Moustro.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://recursos/font/IrishGrover-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assents temporal/adn.png" type="Texture" id=7]
 [ext_resource path="res://assents temporal/luz.png" type="Texture" id=8]
+[ext_resource path="res://juego/cuadroInformacion/InformacionRecord.tscn" type="PackedScene" id=9]
+[ext_resource path="res://recursos/musica/POL-follow-me-short.wav" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -272,6 +274,15 @@ position = Vector2( 219, 339 )
 rotation = -3.04036
 texture = ExtResource( 8 )
 color = Color( 0.894118, 0.909804, 0.396078, 1 )
+
+[node name="InformacionRecord" parent="." instance=ExtResource( 9 )]
+position = Vector2( 212, 152 )
+
+[node name="MusicaFondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+volume_db = -2.0
+autoplay = true
+bus = "Musica"
 
 [connection signal="pressed" from="BotonJugar" to="." method="_on_BotonJugar_pressed"]
 [connection signal="pressed" from="BotonEvolucionar" to="." method="_on_BotonEvolucionar_pressed"]

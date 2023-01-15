@@ -2,6 +2,7 @@ extends Node
 
 var nivel: int
 var puntosTotal: int
+var puntMasAlta: int = 0
 var array_pts_evolucion = [300, 1000, 1900, 999999]
 var arrat_bonus_nivel = [1, 3]
 var tipo_muerte: String

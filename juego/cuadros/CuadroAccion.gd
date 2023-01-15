@@ -1,7 +1,7 @@
 class_name CuadroAccion
 extends Node2D
 
-export(String, "espada", "bomba","calavera") var tipo setget ,get_tipo
+export(String, "espada", "bomba","calavera", "diamante") var tipo setget ,get_tipo
 
 var mi_pos: Vector2 = Vector2.ZERO
 
@@ -15,8 +15,10 @@ func _ready() -> void:
 		$SpriteEspada.visible = true
 	elif tipo == "bomba":
 		$SpriteBomba.visible = true
-	else:
+	elif tipo == "calavera":
 		$SpriteCalavera.visible = true
+	else:
+		$SpriteDiamante.visible = true
 	
 
 func crear(pos: Vector2, tipo_cuadro: String):
