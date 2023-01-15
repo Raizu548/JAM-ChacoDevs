@@ -20,12 +20,17 @@ onready var barraTiempo = $BarraTiempo
 onready var bombitaTiempo = $BombitaTiempo
 onready var ventanaDerrota = $HUD/VentanaEmergentederrota
 onready var ventanaGuia = $HUD/MenuGuia
+onready var barraCombo = $BarraCombo
+onready var labelCombo = $LabelCantCombo
 
 var tamano = 1.6
 var puedePulsar = true
 var congelado = false
 var cadenciaPulsacion = 0.12
 var velocidadAnimacion = 0.1
+var combo: float = 0
+var comboTot: int = 0
+var enCombo: bool = false
 
 
 func _ready() -> void:
@@ -59,6 +64,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
+	descontar_combo()
 	if puedePulsar and !congelado:
 		timerPulso.start()
 		if Input.is_action_just_pressed("flecha_der"):
@@ -73,7 +79,7 @@ func _process(delta: float) -> void:
 			bajar_cuadros(contPosDer,contenedorDer)
 			bajar_cuadros(contPosIzq,contenedorIzq)
 			agrandar_ambos_primero()
-			agregar_nuevo_cuadro()
+			agregar_cuadro()
 			puedePulsar = false
 
 		elif Input.is_action_just_pressed("flecha_izq"):
@@ -88,10 +94,10 @@ func _process(delta: float) -> void:
 			bajar_cuadros(contPosDer,contenedorDer)
 			bajar_cuadros(contPosIzq,contenedorIzq)
 			agrandar_ambos_primero()
-			agregar_nuevo_cuadro()
+			agregar_cuadro()
 			puedePulsar = false
 		
-	
+		
 func seleccionar_tipo() -> String:
 	var random = RandomNumberGenerator.new()
 	random.randomize()
@@ -128,7 +134,8 @@ func agrandar_ambos_primero() -> void:
 
 
 func bajar_cuadros(contenedorPos: Node2D, contObj: Node) -> void:
-	var posiciones = contObj.get_child_count() -1
+	#var posiciones = contObj.get_child_count() -1
+	var posiciones = 11 # Hard code -> pero sirve
 	for i in range(posiciones):
 		var posAbajo = contenedorPos.get_child(i)
 		var objeto = contObj.get_child(i +1)
@@ -152,6 +159,13 @@ func mover_al_centro(objeto: CuadroAccion) -> void:
 	tweenDesap.start()
 
 
+func agregar_cuadro() -> void:
+	if not enCombo:
+		agregar_nuevo_cuadro()
+	else:
+		agregar_diamantes()
+
+
 func agregar_nuevo_cuadro() -> void:
 	var tipo_izq = seleccionar_tipo()
 	var nuevo_cuadro_izq = cuadroAccion.instance()
@@ -169,21 +183,97 @@ func agregar_nuevo_cuadro() -> void:
 	get_node("contenedorDer").add_child(nuevo_cuadro_der)
 
 
+func agregar_diamantes() -> void:
+	var nuevo_cuadro_izq = cuadroAccion.instance()
+	var nuevo_cuadro_der = cuadroAccion.instance()
+	var ultimo = contPosDer.get_child_count() -1
+	nuevo_cuadro_izq.crear(contPosIzq.get_child(ultimo).global_position, "diamante")
+	nuevo_cuadro_der.crear(contPosDer.get_child(ultimo).global_position, "diamante")
+	
+	get_node("contenedorIzq").add_child(nuevo_cuadro_izq)
+	get_node("contenedorDer").add_child(nuevo_cuadro_der)
+
+
+func convertir_en_diamantes(contenedor: Node, contPos: Node2D) -> void:
+	var posiciones = contPos.get_child_count()
+	var nombreCont = contenedor.get_name()
+	limpiar_contenedor(contenedor)
+	for i in range(posiciones):
+		var nuevo_cuadro = cuadroAccion.instance()
+		nuevo_cuadro.crear(contPos.get_child(i).global_position, "diamante")
+		get_node(nombreCont).add_child(nuevo_cuadro)
+
+
+func limpiar_contenedor(contenedor: Node) -> void:
+	var posiciones = contenedor.get_child_count()
+	for i in range(posiciones):
+		var objeto = contenedor.get_child(i)
+		objeto.queue_free()
+	
+
 func obtenerPunto(objeto: CuadroAccion) -> void:
-	if objeto.get_tipo() == "espada":
+	if objeto.get_tipo() == "espada" or objeto.get_tipo() == "diamante":
 		contenedorPuntuacion.agregarPunto(moustroDatos.bonus)
+		sumar_combo()
 		barraTiempo.aumentar_tiempo()
 	elif objeto.get_tipo() == "bomba":
 		bombitaTiempo.activar_tiempo()
 		congelado = true
+		combo_a_cero()
 	else:
 		DatosJuego.tipo_muerte = "calavera"
 		barraTiempo.matar_tiempo()
+		combo_a_cero()
 
 
 func mostrar_ventana_guia() -> void:
 	ventanaGuia.visible = true
 	get_tree().paused = not get_tree().paused
+
+
+func combo_a_cero() -> void:
+	combo = 0
+	comboTot = 0
+	ocultar_combo()
+
+
+func sumar_combo() -> void:
+	if not enCombo:
+		combo += 1
+		if combo == 100:
+			enCombo = true
+			convertir_en_diamantes(contenedorIzq,contPosIzq)
+			convertir_en_diamantes(contenedorDer,contPosDer)
+			agrandar_ambos_primero()
+	comboTot += 1
+	actualizar_combo()
+	hacer_visible_combo()
+
+
+func descontar_combo() -> void:
+	if enCombo:
+		combo -= 0.5
+		print(combo)
+		actualizar_combo()
+		if combo <= 0:
+			enCombo = false
+
+
+func ocultar_combo() -> void:
+	barraCombo.visible = false
+	labelCombo.visible = false
+	$LabelTextCombo.visible = false
+
+
+func hacer_visible_combo() -> void:
+	barraCombo.visible = true
+	labelCombo.visible = true
+	$LabelTextCombo.visible = true
+
+
+func actualizar_combo() -> void:
+	barraCombo.value = combo
+	labelCombo.text = "{valor}".format({"valor":comboTot})
 
 
 func _on_TweenDesaparecer_tween_completed(object: Object, key: NodePath) -> void:
