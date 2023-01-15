@@ -72,6 +72,7 @@ func _process(delta: float) -> void:
 		timerPulso.start()
 		if Input.is_action_just_pressed("flecha_der") or botonDer.getPresionado():
 			barraTiempo.comenzar()
+			botonDer.esPresionado()
 			var objeto: CuadroAccion = get_node("contenedorDer").get_child(0)
 			mover_al_centro(objeto)
 			obtenerPunto(objeto)
@@ -86,6 +87,7 @@ func _process(delta: float) -> void:
 
 		elif Input.is_action_just_pressed("flecha_izq") or botonIzq.getPresionado():
 			barraTiempo.comenzar()
+			botonIzq.esPresionado()
 			var objeto: CuadroAccion = get_node("contenedorIzq").get_child(0)
 			mover_al_centro(objeto)
 			obtenerPunto(objeto)
