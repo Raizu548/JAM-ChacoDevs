@@ -9,13 +9,14 @@ Monster evolution es un juego sencillo con tema de "evolucion", debes conseguir 
 
 *Capturas*
 
-https://github.com/Raizu548/JAM-ChacoDevs/blob/main/recursos/Captura1.PNG
+![image text](https://github.com/Raizu548/JAM-ChacoDevs/blob/main/recursos/Captura1.PNG)
+![image text](https://github.com/Raizu548/JAM-ChacoDevs/blob/main/recursos/Captura2.PNG)
 
 
 ***Engine:*** Godot v.3.4.4
 
 ***Lenguaje:*** GDScript
 
-***Plataforma:*** PC
+***Plataforma:*** Web
 
 ***
